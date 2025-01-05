@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controlador para verficiar palindromos
+ * Controlador para verificar palindromos
  */
 @RestController
 public class ControllerPalindromo {
 
     /**
-     * Endpoint para verificar si una plabra es un palindromo
+     * Endpoint para verificar si una palabra es un palindromo
      * @param palabra Palabra a verificar
      * @return mensaje de si es palindromo o no
      */
