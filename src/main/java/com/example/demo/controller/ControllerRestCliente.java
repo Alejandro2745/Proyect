@@ -4,7 +4,9 @@ import com.example.demo.domain.Cliente;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,7 +41,15 @@ public class ControllerRestCliente {
     @PostMapping
     public ResponseEntity<?> postCliente(@RequestBody Cliente cliente){
         clientes.add(cliente);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Cliente creado exitosamente: "+cliente.getUsername());
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{username}")
+                .buildAndExpand(cliente.getUsername())
+                .toUri();
+
+        return ResponseEntity.created(location).build();
+        //return ResponseEntity.created(location).body(cliente);
     }
 
     @PutMapping
@@ -49,10 +59,10 @@ public class ControllerRestCliente {
                 c.setNombre(cliente.getNombre());
                 c.setUsername(cliente.getUsername());
                 c.setPassword(cliente.getPassword());
-                return ResponseEntity.ok("Cliente modificado satisfactoriamente(ID): " + cliente.getID());
+                return ResponseEntity.noContent().build();
             }
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado (ID): " + cliente.getID());
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
@@ -60,10 +70,10 @@ public class ControllerRestCliente {
         for(Cliente c : clientes){
             if (c.getID() == id){
                 clientes.remove(c);
-                return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Cliente eliminado correctamente: "+id);
+                return ResponseEntity.noContent().build();
             }
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no existe (ID): "+id);
+        return ResponseEntity.notFound().build();
     }
 
     @PatchMapping
