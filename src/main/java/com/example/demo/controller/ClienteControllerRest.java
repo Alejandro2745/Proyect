@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/clientes")
-public class ControllerRestCliente {
+public class ClienteControllerRest {
     private List<Cliente> clientes = new ArrayList<>(Arrays.asList(
             new Cliente(123,"Eduardo alfoso","Alfons","arroz"),
             new Cliente(456,"Laura Sanchez","lauras","pass234"),
@@ -35,7 +35,7 @@ public class ControllerRestCliente {
                 return ResponseEntity.ok(c);
             }
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encotrado con username: "+username);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado con username: "+username);
     }
 
     @PostMapping

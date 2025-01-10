@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Controlador para verificar palindromos
  */
 @RestController
-public class ControllerPalindromo {
+public class PalindromoControlle {
 
     /**
      * Endpoint para verificar si una palabra es un palindromo
