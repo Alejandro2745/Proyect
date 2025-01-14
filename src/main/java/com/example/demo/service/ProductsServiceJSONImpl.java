@@ -3,13 +3,14 @@ package com.example.demo.service;
 import com.example.demo.domain.Product;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.context.annotation.Primary;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
 
-@Service("jsonResourceService")
+@Service
+@ConditionalOnProperty(name = "service.products", havingValue = "json")
 public class ProductsServiceJSONImpl implements ProductService{
 
 
